@@ -456,6 +456,115 @@
             box-shadow: 0 8px 25px rgba(233, 30, 99, 0.6);
         }
 
+        /* --- LUXURY POPUP MODAL STYLING --- */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(10px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-card {
+            background: linear-gradient(145deg, #13131a, #0b0b0f);
+            border: 1px solid rgba(212, 175, 55, 0.4);
+            border-radius: 20px;
+            padding: 40px 30px;
+            max-width: 440px;
+            width: 90%;
+            text-align: center;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(212, 175, 55, 0.2);
+            transform: scale(0.7);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+        }
+
+        .modal-overlay.active .modal-card {
+            transform: scale(1);
+        }
+
+        .modal-icon-wrapper {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: rgba(212, 175, 55, 0.1);
+            border: 2px solid var(--gold-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.3);
+        }
+
+        .modal-icon-wrapper.error {
+            border-color: #ff3333;
+            background: rgba(255, 51, 51, 0.1);
+            box-shadow: 0 0 20px rgba(255, 51, 51, 0.3);
+        }
+
+        .modal-icon-wrapper i {
+            font-size: 38px;
+            color: var(--gold-light);
+        }
+
+        .modal-icon-wrapper.error i {
+            color: #ff3333;
+        }
+
+        .modal-title {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 10px;
+            background: var(--gold-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .modal-title.error {
+            background: none;
+            -webkit-text-fill-color: initial;
+            color: #ff5555;
+        }
+
+        .modal-desc {
+            color: var(--text-sub);
+            font-size: 14px;
+            margin-bottom: 30px;
+            line-height: 1.5;
+        }
+
+        .btn-modal-close {
+            background: var(--gold-gradient);
+            color: #000;
+            border: none;
+            padding: 12px 35px;
+            border-radius: 25px;
+            font-weight: bold;
+            font-size: 14px;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
+            transition: 0.3s;
+        }
+
+        .btn-modal-close:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+        }
+
         /* Footer */
         footer {
             background: #040405;
@@ -679,6 +788,18 @@
         </form>
     </section>
 
+    <!-- Luxury Modal Popup HTML Structure -->
+    <div class="modal-overlay" id="customModal">
+        <div class="modal-card">
+            <div class="modal-icon-wrapper" id="modalIcon">
+                <i class="fas fa-check"></i>
+            </div>
+            <h3 class="modal-title" id="modalTitle">Order Confirmed!</h3>
+            <p class="modal-desc" id="modalDesc">Thank you for ordering. Your order has been placed discreetly and details have been emailed to you.</p>
+            <button class="btn-modal-close" onclick="closeModal()">Continue Shopping</button>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="footer-links">
@@ -706,11 +827,38 @@
             document.getElementById('order').scrollIntoView({ behavior: 'smooth' });
         }
 
+        /* Modal Trigger Handler Functions */
+        function showModal(isSuccess, title, message) {
+            const modal = document.getElementById('customModal');
+            const iconWrapper = document.getElementById('modalIcon');
+            const modalTitle = document.getElementById('modalTitle');
+            const modalDesc = document.getElementById('modalDesc');
+
+            if(isSuccess) {
+                iconWrapper.className = 'modal-icon-wrapper';
+                iconWrapper.innerHTML = '<i class="fas fa-check"></i>';
+                modalTitle.className = 'modal-title';
+            } else {
+                iconWrapper.className = 'modal-icon-wrapper error';
+                iconWrapper.innerHTML = '<i class="fas fa-times"></i>';
+                modalTitle.className = 'modal-title error';
+            }
+
+            modalTitle.innerText = title;
+            modalDesc.innerText = message;
+            modal.classList.add('active');
+        }
+
+        function closeModal() {
+            document.getElementById('customModal').classList.remove('active');
+        }
+
+        /* Order Form Submit Handler */
         document.getElementById('orderForm').addEventListener('submit', function(event) {
             event.preventDefault();
 
             const submitBtn = this.querySelector('.btn-submit');
-            submitBtn.innerHTML = 'Sending...';
+            submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Processing...';
             submitBtn.disabled = true;
 
             const templateParams = {
@@ -726,14 +874,26 @@
 
             emailjs.send('service_4pdzz8m', 'template_8gtjtwg', templateParams)
                 .then(function(response) {
-                    alert('SUCCESS! Your order has been placed successfully.');
                     document.getElementById('orderForm').reset();
                     submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Order Now';
                     submitBtn.disabled = false;
+                    
+                    // Display Luxury Success Popup
+                    showModal(
+                        true, 
+                        'Order Confirmed!', 
+                        'Thank you for your trust! Your order has been placed successfully in 100% discreet packaging.'
+                    );
                 }, function(error) {
-                    alert('FAILED... Please try again later. Error: ' + JSON.stringify(error));
                     submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Order Now';
                     submitBtn.disabled = false;
+                    
+                    // Display Luxury Error Popup
+                    showModal(
+                        false, 
+                        'Order Failed', 
+                        'Something went wrong while placing your order. Please try again or contact support.'
+                    );
                 });
         });
     </script>
