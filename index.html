@@ -1,0 +1,786 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PRIME BLAX – Bolder Intimacy</title>
+
+  <!-- Google Fonts & FontAwesome Icons -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700;800;900&family=Playfair+Display:ital,wght@1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <!-- EmailJS SDK Integration -->
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+  <script type="text/javascript">
+    (function() {
+      emailjs.init("-PLCC2yL3gUAKyS7v");
+    })();
+  </script>
+
+  <style>
+    /* Global Reset & Styling */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Montserrat', sans-serif;
+    }
+    body {
+      background-color: #050505;
+      color: #ffffff;
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    /* 1. Header (Black Bar) */
+    header {
+      background: rgba(0, 0, 0, 0.95);
+      border-bottom: 1px solid rgba(213, 166, 80, 0.2);
+      backdrop-filter: blur(10px);
+      padding: 18px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      box-shadow: 0 4px 25px rgba(0,0,0,0.8);
+    }
+    .logo {
+      display: flex;
+      flex-direction: column;
+    }
+    .logo-main {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: 3px;
+      background: linear-gradient(135deg, #FFF, #d5a650, #966f27);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+    }
+    .logo-sub {
+      font-size: 9px;
+      letter-spacing: 4px;
+      color: #d5a650;
+      margin-top: -2px;
+      font-weight: 600;
+    }
+    .btn-header-order {
+      background: linear-gradient(135deg, #d5a650 0%, #a67c2e 100%);
+      color: #000;
+      font-weight: 800;
+      padding: 12px 28px;
+      border-radius: 30px;
+      text-decoration: none;
+      font-size: 13px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      box-shadow: 0 0 15px rgba(213, 166, 80, 0.4);
+      transition: all 0.3s ease;
+    }
+    .btn-header-order:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 0 25px rgba(213, 166, 80, 0.7);
+    }
+
+    /* 2. Hero Banner Section */
+    .hero-container {
+      position: relative;
+      width: 100%;
+      min-height: 85vh;
+      background: url('https://lh3.googleusercontent.com/d/1pFbjd9usiSsA640SAHTuewWyCAcDegvF') center/cover no-repeat;
+      display: flex;
+      align-items: center;
+      padding: 60px 6%;
+      overflow: hidden;
+    }
+
+    .hero-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(213, 166, 80, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(255, 42, 133, 0.12) 0%, transparent 40%),
+        linear-gradient(90deg, rgba(5,5,5,0.95) 0%, rgba(5,5,5,0.75) 45%, rgba(5,5,5,0.3) 100%);
+      z-index: 1;
+    }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 650px;
+      padding: 20px 0;
+    }
+    
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(213, 166, 80, 0.12);
+      border: 1px solid rgba(213, 166, 80, 0.4);
+      padding: 6px 16px;
+      border-radius: 50px;
+      color: #d5a650;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      backdrop-filter: blur(5px);
+    }
+    
+    .hero-title {
+      font-size: 56px;
+      font-weight: 900;
+      line-height: 1.05;
+      margin-bottom: 20px;
+      letter-spacing: -1px;
+      text-transform: uppercase;
+    }
+    .hero-title .glow-gold {
+      background: linear-gradient(135deg, #FFF 0%, #f3d082 50%, #d5a650 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .hero-title .highlight-pink {
+      color: #ff2a85;
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+    }
+
+    .hero-desc {
+      color: #e0e0e0;
+      font-size: 16px;
+      margin-bottom: 35px;
+      line-height: 1.7;
+    }
+
+    .hero-features {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 25px;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 10px 18px;
+      border-radius: 12px;
+    }
+    .feature-item i {
+      color: #d5a650;
+    }
+
+    /* 3. Products Section (Strictly 1 Single Line Layout) */
+    .products-section {
+      padding: 80px 4%;
+      max-width: 1450px;
+      margin: 0 auto;
+    }
+    .products-header {
+      text-align: center;
+      margin-bottom: 50px;
+    }
+    .products-title {
+      font-size: 36px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .products-title span {
+      background: linear-gradient(135deg, #d5a650, #f3d082);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .products-subtitle {
+      color: #888;
+      font-size: 15px;
+      margin-top: 8px;
+    }
+
+    /* Single Row Flexbox Container */
+    .products-grid {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      gap: 15px;
+      overflow-x: auto;
+      padding-bottom: 15px;
+      scrollbar-width: thin;
+      scrollbar-color: #d5a650 #111;
+    }
+    .products-grid::-webkit-scrollbar {
+      height: 6px;
+    }
+    .products-grid::-webkit-scrollbar-thumb {
+      background: #d5a650;
+      border-radius: 10px;
+    }
+
+    .product-card {
+      flex: 1;
+      min-width: 220px;
+      background: linear-gradient(180deg, #141416 0%, #09090a 100%);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 16px;
+      padding: 20px 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: all 0.4s ease;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    .product-card:hover {
+      transform: translateY(-8px);
+      border-color: rgba(213, 166, 80, 0.6);
+      box-shadow: 0 15px 35px rgba(213, 166, 80, 0.2);
+    }
+    .product-img-container {
+      width: 100%;
+      height: 190px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-bottom: 15px;
+    }
+    .product-img-container img {
+      max-width: 100%;
+      max-height: 100%;
+      object-fit: contain;
+      filter: drop-shadow(0 8px 15px rgba(0,0,0,0.7));
+      transition: transform 0.4s ease;
+    }
+    .product-card:hover .product-img-container img {
+      transform: scale(1.08);
+    }
+    .product-name {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+    .product-slogan {
+      font-size: 11px;
+      color: #999;
+      text-align: center;
+      margin-bottom: 20px;
+      min-height: 34px;
+      line-height: 1.4;
+    }
+    .btn-product-order {
+      width: 100%;
+      background: transparent;
+      border: 1px solid #d5a650;
+      color: #d5a650;
+      padding: 10px 0;
+      border-radius: 25px;
+      font-size: 12px;
+      font-weight: 800;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      text-transform: uppercase;
+    }
+    .btn-product-order:hover {
+      background: linear-gradient(135deg, #d5a650, #a67c2e);
+      color: #000;
+      border-color: transparent;
+      box-shadow: 0 0 15px rgba(213, 166, 80, 0.4);
+    }
+
+    /* 4. Order Now Section */
+    .order-section {
+      padding: 20px 4% 40px 4%;
+      max-width: 1250px;
+      margin: 0 auto;
+    }
+    .order-box {
+      background: linear-gradient(145deg, #121215 0%, #0a0a0c 100%);
+      border: 1px solid rgba(255, 42, 133, 0.3);
+      border-radius: 24px;
+      padding: 50px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px rgba(255, 42, 133, 0.1);
+    }
+    .order-header {
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+      padding-bottom: 25px;
+      margin-bottom: 35px;
+      text-align: center;
+    }
+    .order-title {
+      font-size: 38px;
+      font-weight: 900;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+    }
+    .order-title span {
+      color: #ff2a85;
+      text-shadow: 0 0 20px rgba(255, 42, 133, 0.5);
+    }
+    .order-sub {
+      color: #aaa;
+      font-size: 14px;
+      margin-top: 6px;
+    }
+
+    .form-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+    .form-group {
+      margin-bottom: 22px;
+    }
+    .form-group label {
+      display: block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #ddd;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .form-group label span {
+      color: #ff2a85;
+    }
+    .input-wrapper {
+      position: relative;
+    }
+    .input-wrapper i {
+      position: absolute;
+      left: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+    }
+    .input-wrapper textarea + i {
+      top: 20px;
+      transform: none;
+    }
+    .form-control {
+      width: 100%;
+      background: #18181c;
+      border: 1px solid #333;
+      border-radius: 12px;
+      padding: 14px 16px 14px 45px;
+      color: #fff;
+      font-size: 14px;
+      outline: none;
+      transition: all 0.3s ease;
+    }
+    .form-control:focus {
+      border-color: #ff2a85;
+      background: #1e1e24;
+      box-shadow: 0 0 15px rgba(255, 42, 133, 0.2);
+    }
+    select.form-control {
+      appearance: none;
+      cursor: pointer;
+    }
+    textarea.form-control {
+      resize: vertical;
+      min-height: 110px;
+    }
+
+    .btn-submit {
+      width: 100%;
+      background: linear-gradient(135deg, #ff2a85 0%, #b8004f 100%);
+      color: #ffffff;
+      border: none;
+      padding: 18px;
+      border-radius: 35px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 15px;
+      box-shadow: 0 10px 30px rgba(255, 42, 133, 0.4);
+      transition: all 0.3s ease;
+    }
+    .btn-submit:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255, 42, 133, 0.6);
+    }
+    .success-msg {
+      display: none;
+      background: rgba(39, 174, 96, 0.15);
+      border: 1px solid #27ae60;
+      color: #2ecc71;
+      padding: 18px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: 700;
+      font-size: 16px;
+      margin-top: 25px;
+    }
+
+    /* 5. Contact Details Footer Section (Sabse Niche) */
+    .contact-footer-section {
+      padding: 20px 4% 60px 4%;
+      max-width: 1250px;
+      margin: 0 auto;
+    }
+    .contact-card {
+      background: rgba(20, 20, 23, 0.8);
+      border: 1px solid rgba(213, 166, 80, 0.3);
+      border-radius: 20px;
+      padding: 30px;
+      display: flex;
+      justify-content: space-around;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 25px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+    }
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 15px;
+    }
+    .contact-icon {
+      width: 50px;
+      height: 50px;
+      background: rgba(213, 166, 80, 0.1);
+      border: 1px solid rgba(213, 166, 80, 0.4);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #d5a650;
+      font-size: 20px;
+    }
+    .contact-text-title {
+      font-size: 11px;
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-weight: 700;
+    }
+    .contact-text-value {
+      font-size: 16px;
+      font-weight: 700;
+      color: #fff;
+      text-decoration: none;
+    }
+    .contact-text-value:hover {
+      color: #d5a650;
+    }
+
+    @media (max-width: 768px) {
+      .form-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-title {
+        font-size: 38px;
+      }
+      .order-box {
+        padding: 25px;
+      }
+      .contact-card {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Header -->
+  <header>
+    <div class="logo">
+      <div class="logo-main">PRIME BLAX</div>
+      <div class="logo-sub">BOLDER INTIMACY</div>
+    </div>
+    <a href="#order-form-section" class="btn-header-order">Order Now <i class="fa-solid fa-arrow-right"></i></a>
+  </header>
+
+  <!-- Hero Banner -->
+  <section class="hero-container">
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <div class="hero-badge">
+        <i class="fa-solid fa-crown"></i> Premium Intimacy Series
+      </div>
+      <h1 class="hero-title">
+        <span class="glow-gold">BOLDER TOGETHER</span><br>
+        <span class="highlight-pink">Safer, Stronger, Closer</span>
+      </h1>
+      <p class="hero-desc">
+        Experience ultimate sensation with Prime Blax premium condoms. Designed for unmatched safety, deeper passion, and intense pleasure-filled moments.
+      </p>
+      
+      <div class="hero-features">
+        <div class="feature-item">
+          <i class="fa-solid fa-shield-halved"></i> 100% Dermatologically Tested
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-user-lock"></i> 100% Discreet Packaging
+        </div>
+        <div class="feature-item">
+          <i class="fa-solid fa-bolt"></i> Express Secure Delivery
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Products Section (Strictly 5 in 1 Line) -->
+  <section class="products-section">
+    <div class="products-header">
+      <h2 class="products-title">EXPLORE <span>OUR RANGE</span></h2>
+      <p class="products-subtitle">Different moments. Different needs. Always a safer you.</p>
+    </div>
+
+    <div class="products-grid">
+      
+      <!-- Product 1: Ultra Thin -->
+      <div class="product-card">
+        <div class="product-img-container">
+          <img src="https://lh3.googleusercontent.com/d/1UGnVtFyi_FiqiU8PIdrHNgu1J_4vWeb9" alt="Ultra Thin">
+        </div>
+        <div class="product-name">Ultra Thin</div>
+        <div class="product-slogan">Feel More, Be Closer. Maximum Sensitivity.</div>
+        <a href="#order-form-section" onclick="selectProduct('Ultra Thin')" class="btn-product-order">Order Now <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Product 2: Ribbed & Dotted -->
+      <div class="product-card">
+        <div class="product-img-container">
+          <img src="https://lh3.googleusercontent.com/d/1JrKsqbgIFoSB9RTMGpMKO_evMfge7_TL" alt="Ribbed & Dotted">
+        </div>
+        <div class="product-name">Ribbed & Dotted</div>
+        <div class="product-slogan">More Sensation, Together. Extra Stimulation.</div>
+        <a href="#order-form-section" onclick="selectProduct('Ribbed & Dotted')" class="btn-product-order">Order Now <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Product 3: Long Lasting -->
+      <div class="product-card">
+        <div class="product-img-container">
+          <img src="https://lh3.googleusercontent.com/d/1oPOuzw5-VkpG_4sSiE5X6QNfkSOez8K7" alt="Long Lasting">
+        </div>
+        <div class="product-name">Long Lasting</div>
+        <div class="product-slogan">Stay In Control, Longer. Pleasure That Lasts.</div>
+        <a href="#order-form-section" onclick="selectProduct('Long Lasting')" class="btn-product-order">Order Now <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Product 4: Flavoured -->
+      <div class="product-card">
+        <div class="product-img-container">
+          <img src="https://lh3.googleusercontent.com/d/1XHcNguxYC-2ThqXCA34manoGlHKWmAa9" alt="Flavoured">
+        </div>
+        <div class="product-name">Flavoured</div>
+        <div class="product-slogan">Taste The Fun. Fun & Exciting Experience.</div>
+        <a href="#order-form-section" onclick="selectProduct('Flavoured')" class="btn-product-order">Order Now <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+      <!-- Product 5: Original Black -->
+      <div class="product-card">
+        <div class="product-img-container">
+          <img src="https://lh3.googleusercontent.com/d/1mLYXEk9aUdDgGldxkPopFjn52J27eY9k" alt="Original Black">
+        </div>
+        <div class="product-name">Original Black</div>
+        <div class="product-slogan">Classic Protection. Dark, Bold & Sleek.</div>
+        <a href="#order-form-section" onclick="selectProduct('Original Black')" class="btn-product-order">Order Now <i class="fa-solid fa-arrow-right"></i></a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Order Now Section -->
+  <section class="order-section" id="order-form-section">
+    <div class="order-box">
+      <div class="order-header">
+        <h2 class="order-title">ORDER <span>NOW</span></h2>
+        <p class="order-sub">Quick. Easy. Discreet. Get your favourite Prime Blax condoms delivered directly to your doorstep.</p>
+      </div>
+
+      <form id="primeBlaxOrderForm">
+        <div class="form-grid">
+          
+          <!-- Left Column -->
+          <div class="col-left">
+            <div class="form-group">
+              <label>Full Name <span>*</span></label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-user"></i>
+                <input type="text" name="user_name" class="form-control" placeholder="Enter your full name" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Email Address <span>*</span></label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-envelope"></i>
+                <input type="email" name="user_email" class="form-control" placeholder="Enter your email address" required>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Mobile Number <span>*</span></label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-phone"></i>
+                <input type="tel" name="user_phone" class="form-control" placeholder="Enter your mobile number" required>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column -->
+          <div class="col-right">
+            <div class="form-group">
+              <label>Shipping Address <span>*</span></label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-location-dot"></i>
+                <input type="text" name="address" class="form-control" placeholder="House No., Street, Area, City" required>
+              </div>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+              <div class="form-group">
+                <label>PIN Code <span>*</span></label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-map-pin"></i>
+                  <input type="text" name="pincode" class="form-control" placeholder="PIN Code" required>
+                </div>
+              </div>
+
+              <div class="form-group">
+                <label>Quantity <span>*</span></label>
+                <div class="input-wrapper">
+                  <i class="fa-solid fa-layer-group"></i>
+                  <select name="quantity" class="form-control" required>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Select Product <span>*</span></label>
+              <div class="input-wrapper">
+                <i class="fa-solid fa-box-open"></i>
+                <select name="product_name" id="productSelect" class="form-control" required>
+                  <option value="" disabled selected>-- Select Product --</option>
+                  <option value="Ultra Thin">Ultra Thin</option>
+                  <option value="Ribbed & Dotted">Ribbed & Dotted</option>
+                  <option value="Long Lasting">Long Lasting</option>
+                  <option value="Flavoured">Flavoured</option>
+                  <option value="Original Black">Original Black</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label>Additional Message (Optional)</label>
+              <div class="input-wrapper">
+                <i class="fa-regular fa-comment"></i>
+                <textarea name="message" class="form-control" placeholder="Any special delivery instructions..."></textarea>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Submit Button -->
+        <button type="submit" id="btnSubmit" class="btn-submit">
+          <i class="fa-solid fa-paper-plane"></i> Order Now
+        </button>
+      </form>
+
+      <!-- Success Message -->
+      <div id="successMsg" class="success-msg">
+        ✅ Order Successfully!
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. Contact Details Footer Section (Sabse Niche) -->
+  <section class="contact-footer-section">
+    <div class="contact-card">
+      <div class="contact-item">
+        <div class="contact-icon">
+          <i class="fa-solid fa-envelope"></i>
+        </div>
+        <div>
+          <div class="contact-text-title">Email Us</div>
+          <a href="mailto:ravendrapatelofficial@gmail.com" class="contact-text-value">ravendrapatelofficial@gmail.com</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <i class="fa-solid fa-phone"></i>
+        </div>
+        <div>
+          <div class="contact-text-title">Call / WhatsApp</div>
+          <a href="tel:+919183207213" class="contact-text-value">+91 9183207213</a>
+        </div>
+      </div>
+
+      <div class="contact-item">
+        <div class="contact-icon">
+          <i class="fa-solid fa-headset"></i>
+        </div>
+        <div>
+          <div class="contact-text-title">Customer Support</div>
+          <div class="contact-text-value">24/7 Assistance</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- JavaScript logic -->
+  <script>
+    function selectProduct(productName) {
+      const selectBox = document.getElementById('productSelect');
+      selectBox.value = productName;
+    }
+
+    document.getElementById('primeBlaxOrderForm').addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      const btn = document.getElementById('btnSubmit');
+      btn.innerText = 'Sending Order...';
+      btn.disabled = true;
+
+      const serviceID = 'service_4pdzz8m';
+      const templateID = 'template_8gtjtwg';
+
+      emailjs.sendForm(serviceID, templateID, this)
+        .then(() => {
+          btn.innerText = 'Order Now';
+          btn.disabled = false;
+          document.getElementById('successMsg').style.display = 'block';
+          this.reset();
+          document.getElementById('successMsg').scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, (err) => {
+          btn.innerText = 'Order Now';
+          btn.disabled = false;
+          alert('Failed to place order: ' + JSON.stringify(err, null, 2));
+        });
+    });
+  </script>
+</body>
+</html>
